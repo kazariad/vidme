@@ -6,7 +6,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css"/>
     <link rel="stylesheet" href="/static/style.css"/>
@@ -15,12 +16,16 @@
 <body>
 
 <header>
-    <img src="" alt="vidme logo"/>
+    <div class="header-container">
+        <img src="/static/logo.png" alt="vidme logo"/>
+    </div>
 </header>
 
 <main>
     <div class="video">
-        <video class="video-player" th:src="@{/video/stream/{fileId}(fileId=${video.fileId})}" controls autoplay>Video</video>
+        <video class="video-player" th:src="@{/video/stream/{fileId}(fileId=${video.fileId})}" controls autoplay>
+            Video
+        </video>
     </div>
     <div class="video-details">
         <h1 class="video-title" th:text="${video.title}">Video Title</h1>
