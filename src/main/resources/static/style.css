@@ -1,0 +1,66 @@
+html {
+    font-family: "Roboto", sans-serif;
+}
+
+html, body {
+    min-height: 100vh;
+}
+
+@media (min-width: 640px) {
+    html {
+        background-color: #f1f1f1;
+    }
+
+    body {
+        width: max(640px, 98%);
+        max-width: 960px;
+        margin: 0 auto;
+        background-color: white;
+        box-shadow: 3px 0 5px rgb(0 0 0 / 0.15), -3px 0 5px rgb(0 0 0 / 0.15);
+    }
+}
+
+header {
+    display: flex;
+    gap: 10%;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+}
+
+header img {
+    display: block;
+    max-width: 5rem;
+    flex: 0 1 auto;
+}
+
+.video-player {
+    display: block;
+    width: 100%;
+}
+
+/*hide chrome video player's default gradient overlay*/
+.video-player::-webkit-media-controls-panel {
+    background-image: none !important;
+}
+
+.video-details {
+    max-width: 720px;
+    padding: 0.5rem;
+    margin: 1rem auto 0 auto;
+    background: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+}
+
+.video-details > * {
+    margin: 1rem 0;
+}
+
+.video-title {
+    margin-top: 0;
+    text-align: center;
+}
+
+.video-description {
+    margin-bottom: 0;
+}
