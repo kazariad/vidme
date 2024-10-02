@@ -22,14 +22,19 @@
 </header>
 
 <main>
-    <div class="video">
+    <div class="video-container">
         <video class="video-player" th:src="@{/video/stream/{fileId}(fileId=${video.fileId})}" controls autoplay>
             Video
         </video>
     </div>
-    <div class="video-details">
+    <div class="video-details-container">
         <h1 class="video-title" th:text="${video.title}">Video Title</h1>
-        <p class="video-uploaded-at" th:text="|Uploaded ${timeSinceUpload} ago|">Uploaded 0 days ago</p>
+        <div class="video-stats-container">
+            <p class="video-uploaded-at" th:text='${T(java.lang.String).format("Uploaded %s ago", timeSinceUpload)}'>
+                Uploaded 0 days ago
+            </p>
+            <p class="video-views" th:text='${T(java.lang.String).format("%d views", video.views)}'>0 views</p>
+        </div>
         <p class="video-description" th:text="${video.description}">Video Description</p>
     </div>
 </main>

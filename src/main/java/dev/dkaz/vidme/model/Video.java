@@ -18,6 +18,8 @@ public class Video {
 
     private String description;
 
+    private Long views;
+
     public Long getId() {
         return id;
     }
@@ -56,5 +58,13 @@ public class Video {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getViews() {
+        return views;
+    }
+
+    public void setViews(Long views) {
+        this.views = views;
     }
 }

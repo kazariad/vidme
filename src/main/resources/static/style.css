@@ -61,7 +61,7 @@ main {
     background-image: none !important;
 }
 
-.video-details {
+.video-details-container {
     max-width: 720px;
     padding: 0.5rem;
     margin: 1rem auto 0 auto;
@@ -70,8 +70,8 @@ main {
     border-radius: 4px;
 }
 
-.video-details > * {
-    margin: 1rem 0;
+.video-details-container * {
+    margin: 0;
 }
 
 .video-title {
@@ -79,6 +79,11 @@ main {
     text-align: center;
 }
 
-.video-description {
-    margin-bottom: 0;
+.video-stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
 }
