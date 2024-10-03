@@ -17,7 +17,7 @@
 
 <header>
     <div class="header-container">
-        <img src="/static/logo.png" alt="vidme logo"/>
+        <img src="/static/logo.png" width="467" height="163" alt="vidme logo"/>
     </div>
 </header>
 
@@ -29,18 +29,18 @@
         <div class="video-details-container">
             <h1 class="video-title" th:text="${video.title}">Video Title</h1>
             <div class="video-stats-container">
+                <p class="video-views" th:text='${T(java.lang.String).format("%,d views", video.views)}'>0 views</p>
                 <p class="video-uploaded-at"
                    th:text='${T(java.lang.String).format("Uploaded %s ago", timeSinceUpload)}'>
                     Uploaded 0 days ago
                 </p>
-                <p class="video-views" th:text='${T(java.lang.String).format("%,d views", video.views)}'>0 views</p>
             </div>
-            <p style="white-space: pre-line" class="video-description" th:text="${video.description}">Video Description</p>
+            <p class="video-description" style="white-space: pre-line" th:text="${video.description}">Video Description</p>
         </div>
     </main>
 
     <footer>
-        <p th:text="|© ${#temporals.year(#temporals.createNow())} vidme|">© 2024 vidme</p>
+        <p th:text="|© ${#temporals.year(#temporals.createNow())} vidme|">© 2000 vidme</p>
     </footer>
 </div>
 

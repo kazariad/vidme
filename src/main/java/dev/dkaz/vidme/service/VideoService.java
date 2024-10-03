@@ -18,11 +18,8 @@ public class VideoService {
         this.videoFileStorage = videoFileStorage;
     }
 
-    public void incrementVideoViews(Long id) {
-        videoRepository.incrementViews(id);
-    }
-
     public Optional<Video> findVideoById(Long id) {
+        videoRepository.incrementViews(id);
         return videoRepository.findById(id);
     }
 

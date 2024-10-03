@@ -30,7 +30,6 @@ public class VideoWebController {
 
     @GetMapping(path = "/video/{id}")
     public String getVideo(@PathVariable Long id, Model model) {
-        videoService.incrementVideoViews(id);
         Optional<Video> videoOpt = videoService.findVideoById(id);
         if (videoOpt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         Video video = videoOpt.get();
