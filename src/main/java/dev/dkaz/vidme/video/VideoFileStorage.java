@@ -1,7 +1,7 @@
 package dev.dkaz.vidme.video;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
-@Component
+@Service
 public class VideoFileStorage {
     private final Path ROOT;
     private final Map<String, Path> LOOKUP_CACHE;

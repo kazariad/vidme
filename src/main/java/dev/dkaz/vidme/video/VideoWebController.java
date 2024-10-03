@@ -26,14 +26,17 @@ public class VideoWebController {
         this.timeUtils = timeUtils;
     }
 
+    public record VideoWithElapsedTime(Video video, String elapsedTime) {
+    }
+
     @GetMapping(path = "/video/{id}")
     public String getVideo(@PathVariable Long id, Model model) {
         Optional<Video> videoOpt = videoService.findVideoById(id);
         if (videoOpt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         Video video = videoOpt.get();
-        model.addAttribute("video", video);
         // use relative time to avoid determining client's time zone
-        model.addAttribute("timeSinceUpload", timeUtils.getElapsedTime(video.getCreatedAt(), Instant.now()));
+        String elapsedTime = timeUtils.getElapsedTime(video.getCreatedAt(), Instant.now());
+        model.addAttribute("videoDto", new VideoWithElapsedTime(video, elapsedTime));
         return "video";
     }
 

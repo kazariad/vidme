@@ -10,8 +10,11 @@
           rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css"/>
-    <link rel="stylesheet" href="/static/style.css"/>
-    <title th:text="${video.title}">Video Title</title>
+
+    <link rel="stylesheet" href="/static/base.css"/>
+    <link rel="stylesheet" href="/static/video.css"/>
+
+    <title th:text="${videoDto.video().title}">Video Title</title>
 </head>
 <body>
 
@@ -23,19 +26,19 @@
 
 <div class="inner-body">
     <main>
-        <video class="video-player" th:src="@{/video/stream/{fileId}(fileId=${video.fileId})}" controls autoplay>
+        <video class="video-player" th:src="@{/video/stream/{fileId}(fileId=${videoDto.video().fileId})}" controls autoplay>
             Video
         </video>
         <div class="video-details-container">
-            <h1 class="video-title" th:text="${video.title}">Video Title</h1>
+            <h1 class="video-title" th:text="${videoDto.video().title}">Video Title</h1>
             <div class="video-stats-container">
-                <p class="video-views" th:text='${T(java.lang.String).format("%,d views", video.views)}'>0 views</p>
+                <p class="video-views" th:text='${T(java.lang.String).format("%,d views", videoDto.video().views)}'>0 views</p>
                 <p class="video-uploaded-at"
-                   th:text='${T(java.lang.String).format("Uploaded %s ago", timeSinceUpload)}'>
+                   th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.elapsedTime())}'>
                     Uploaded 0 days ago
                 </p>
             </div>
-            <p class="video-description" style="white-space: pre-line" th:text="${video.description}">Video Description</p>
+            <p class="video-description" style="white-space: pre-line" th:text="${videoDto.video().description}">Video Description</p>
         </div>
     </main>
 
