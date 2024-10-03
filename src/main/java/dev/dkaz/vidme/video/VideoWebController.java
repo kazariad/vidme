@@ -1,8 +1,6 @@
-package dev.dkaz.vidme.web;
+package dev.dkaz.vidme.video;
 
-import dev.dkaz.vidme.model.Video;
-import dev.dkaz.vidme.service.TimeUtils;
-import dev.dkaz.vidme.service.VideoService;
+import dev.dkaz.vidme.TimeUtils;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -1,8 +1,5 @@
-package dev.dkaz.vidme.service;
+package dev.dkaz.vidme.video;
 
-import dev.dkaz.vidme.model.Video;
-import dev.dkaz.vidme.persistence.VideoFileStorage;
-import dev.dkaz.vidme.persistence.VideoRepository;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;

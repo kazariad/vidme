@@ -1,4 +1,4 @@
-package dev.dkaz.vidme.model;
+package dev.dkaz.vidme.video;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;

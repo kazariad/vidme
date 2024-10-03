@@ -1,4 +1,4 @@
-package dev.dkaz.vidme.service;
+package dev.dkaz.vidme;
 
 import org.springframework.stereotype.Service;
 
