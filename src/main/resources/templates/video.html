@@ -29,16 +29,16 @@
         <video class="video-player" th:src="@{/video/stream/{fileId}(fileId=${videoDto.video().fileId})}" controls autoplay>
             Video
         </video>
-        <div class="video-details-container">
-            <h1 class="video-title" th:text="${videoDto.video().title}">Video Title</h1>
-            <div class="video-stats-container">
-                <p class="video-views" th:text='${T(java.lang.String).format("%,d views", videoDto.video().views)}'>0 views</p>
-                <p class="video-uploaded-at"
+        <div class="details-container">
+            <h1 class="title" th:text="${videoDto.video().title}">Video Title</h1>
+            <div class="stats-container">
+                <p class="views" th:text='${T(java.lang.String).format("%,d views", videoDto.video().views)}'>0 views</p>
+                <p class="uploaded-at"
                    th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.elapsedTime())}'>
                     Uploaded 0 days ago
                 </p>
             </div>
-            <p class="video-description" style="white-space: pre-line" th:text="${videoDto.video().description}">Video Description</p>
+            <p class="description" style="white-space: pre-line" th:text="${videoDto.video().description}">Video Description</p>
         </div>
     </main>
 

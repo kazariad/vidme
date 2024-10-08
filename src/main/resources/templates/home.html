@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css"/>
+
+    <link rel="stylesheet" href="/static/base.css"/>
+    <link rel="stylesheet" href="/static/home.css"/>
+
+    <title>vidme</title>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <img src="/static/logo.png" width="467" height="163" alt="vidme logo"/>
+    </div>
+</header>
+
+<div class="inner-body">
+    <main>
+        <div class="videos-container">
+            <article class="video-container" th:each="videoDto : ${videoDtos}">
+                <div class="thumbnail-container">
+                    <a href="/video/id" th:href="@{/video/{id}(id=${videoDto.video().id})}">
+                        <img th:src="@{/thumbnail/{fileId}(fileId=${videoDto.video().fileId})}"
+                             class="thumbnail" src="/static/images/1.jpeg" alt="Video thumbnail">
+                    </a>
+                </div>
+                <div class="details-container">
+                    <a class="title plain-link" th:href="@{/video/{id}(id=${videoDto.video().id})}" href="/video/id">
+                        <h2 th:text="${videoDto.video().title}">Video Title</h2>
+                    </a>
+                    <div class="stats-container">
+                        <p class="views"
+                           th:text='${T(java.lang.String).format("%,d views", videoDto.video().views)}'>
+                            0 views
+                        </p>
+                        <p class="uploaded-at"
+                           th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.elapsedTime())}'>
+                            Uploaded 0 days ago
+                        </p>
+                    </div>
+                    <p class="description" th:text="${videoDto.video().description}">Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description</p>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <p th:text="|© ${#temporals.year(#temporals.createNow())} vidme|">© 2000 vidme</p>
+    </footer>
+</div>
+
+</body>
+</html>

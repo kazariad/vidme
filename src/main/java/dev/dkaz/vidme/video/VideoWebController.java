@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.file.Path;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -27,6 +28,17 @@ public class VideoWebController {
     }
 
     public record VideoWithElapsedTime(Video video, String elapsedTime) {
+    }
+
+    @GetMapping(path = "/")
+    public String getHome(Model model) {
+        List<Video> videos = videoService.findAllVideos();
+        List<VideoWithElapsedTime> videoDtos = videos.stream().map(video -> {
+            String elapsedTime = timeUtils.getElapsedTime(video.getCreatedAt(), Instant.now());
+            return new VideoWithElapsedTime(video, elapsedTime);
+        }).toList();
+        model.addAttribute("videoDtos", videoDtos);
+        return "home";
     }
 
     @GetMapping(path = "/video/{id}")

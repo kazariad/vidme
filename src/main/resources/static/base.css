@@ -35,6 +35,12 @@ header {
 .inner-body {
     background-color: white;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
 }
 
 footer p {
@@ -58,4 +64,24 @@ footer p {
         align-self: center;
         box-shadow: 3px 0 5px rgb(0 0 0 / 0.15), -3px 0 5px rgb(0 0 0 / 0.15);
     }
+}
+
+.plain-link:link {
+    color: initial;
+    text-decoration: none;
+}
+
+.plain-link:visited {
+    color: initial;
+    text-decoration: none;
+}
+
+.plain-link:hover {
+    color: initial;
+    text-decoration: none;
+}
+
+.plain-link:active {
+    color: initial;
+    text-decoration: none;
 }
