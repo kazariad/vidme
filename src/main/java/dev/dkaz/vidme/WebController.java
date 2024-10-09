@@ -22,36 +22,39 @@ import java.util.Optional;
 public class WebController {
     private final VideoService videoService;
     private final ThumbnailService thumbnailService;
+    private final HashIdGenerator hashIdGenerator;
     private final TimeUtil timeUtil;
 
-    public WebController(VideoService videoService, ThumbnailService thumbnailService, TimeUtil timeUtil) {
+    public WebController(VideoService videoService, ThumbnailService thumbnailService, HashIdGenerator hashIdGenerator, TimeUtil timeUtil) {
         this.videoService = videoService;
         this.thumbnailService = thumbnailService;
+        this.hashIdGenerator = hashIdGenerator;
         this.timeUtil = timeUtil;
     }
 
-    public record VideoWithUploadTime(Video video, String timeSinceUpload) {
-    }
+    public record VideoWithHashUploadTime(Video video, String hashId, String timeSinceUpload) {}
 
     @GetMapping(path = "/")
     public String getHome(Model model) {
         List<Video> videos = videoService.findAllVideos();
-        List<VideoWithUploadTime> videoDtos = videos.stream().map(video -> {
+        List<VideoWithHashUploadTime> videoDtos = videos.stream().map(video -> {
+            String hashId = hashIdGenerator.encode(video.getId());
             String timeSinceUpload = timeUtil.getElapsedTime(video.getCreatedAt(), Instant.now());
-            return new VideoWithUploadTime(video, timeSinceUpload);
+            return new VideoWithHashUploadTime(video, hashId, timeSinceUpload);
         }).toList();
         model.addAttribute("videoDtos", videoDtos);
         return "home";
     }
 
-    @GetMapping(path = "/video/{id}")
-    public String getVideo(@PathVariable Long id, Model model) {
+    @GetMapping(path = "/video/{hashId}")
+    public String getVideo(@PathVariable String hashId, Model model) {
+        Long id = hashIdGenerator.decode(hashId);
         Optional<Video> videoOpt = videoService.findVideoById(id);
         if (videoOpt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         Video video = videoOpt.get();
         // use relative time since we don't know client's time zone
         String timeSinceUpload = timeUtil.getElapsedTime(video.getCreatedAt(), Instant.now());
-        model.addAttribute("videoDto", new VideoWithUploadTime(video, timeSinceUpload));
+        model.addAttribute("videoDto", new VideoWithHashUploadTime(video, hashId, timeSinceUpload));
         return "video";
     }
 

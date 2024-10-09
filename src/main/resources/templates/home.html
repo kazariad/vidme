@@ -29,13 +29,13 @@
         <div class="videos-container">
             <article class="video-container" th:each="videoDto : ${videoDtos}">
                 <div class="thumbnail-container">
-                    <a href="/video/id" th:href="@{/video/{id}(id=${videoDto.video().id})}">
+                    <a href="/video/hashId" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}">
                         <img th:src="@{/thumbnail/{fileId}(fileId=${videoDto.video().thumbnailId})}"
-                             class="thumbnail" src="/static/images/1.jpeg" alt="Video thumbnail">
+                             src="/thumbnail/fileId" alt="Video thumbnail" class="thumbnail">
                     </a>
                 </div>
                 <div class="details-container">
-                    <a class="title plain-link" th:href="@{/video/{id}(id=${videoDto.video().id})}" href="/video/id">
+                    <a class="title plain-link" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" href="/video/id">
                         <h2 th:text="${videoDto.video().title}">Video Title</h2>
                     </a>
                     <div class="stats-container">
