@@ -13,7 +13,7 @@ public class ThumbnailService {
         this.thumbnailFileStorage = thumbnailFileStorage;
     }
 
-    public Optional<Path> findThumbnailFileByFileId(String fileId) {
-        return thumbnailFileStorage.findByFileId(fileId);
+    public Optional<Path> findThumbnailFileById(String fileId) {
+        return thumbnailFileStorage.findById(fileId);
     }
 }

@@ -6,7 +6,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 @Service
-public class TimeUtils {
+public class TimeUtil {
     public String getElapsedTime(Instant t1, Instant t2) {
         if (t1.isAfter(t2)) throw new IllegalArgumentException("t1 cannot be after t2");
         Duration duration = Duration.between(t1, t2);

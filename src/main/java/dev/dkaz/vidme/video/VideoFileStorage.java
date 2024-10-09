@@ -23,7 +23,7 @@ public class VideoFileStorage {
         LOOKUP_CACHE = new ConcurrentHashMap<>();
     }
 
-    public Optional<Path> findByFileId(String fileId) {
+    public Optional<Path> findById(String fileId) {
         if (LOOKUP_CACHE.containsKey(fileId)) {
             return Optional.of(LOOKUP_CACHE.get(fileId));
         }

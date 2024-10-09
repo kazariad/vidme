@@ -14,6 +14,8 @@ public class Video {
 
     private String fileId;
 
+    private String thumbnailId;
+
     private String title;
 
     private String description;
@@ -42,6 +44,14 @@ public class Video {
 
     public void setFileId(String fileId) {
         this.fileId = fileId;
+    }
+
+    public String getThumbnailId() {
+        return thumbnailId;
+    }
+
+    public void setThumbnailId(String thumbnailId) {
+        this.thumbnailId = thumbnailId;
     }
 
     public String getTitle() {

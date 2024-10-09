@@ -30,7 +30,7 @@
             <article class="video-container" th:each="videoDto : ${videoDtos}">
                 <div class="thumbnail-container">
                     <a href="/video/id" th:href="@{/video/{id}(id=${videoDto.video().id})}">
-                        <img th:src="@{/thumbnail/{fileId}(fileId=${videoDto.video().fileId})}"
+                        <img th:src="@{/thumbnail/{fileId}(fileId=${videoDto.video().thumbnailId})}"
                              class="thumbnail" src="/static/images/1.jpeg" alt="Video thumbnail">
                     </a>
                 </div>
@@ -44,7 +44,7 @@
                             0 views
                         </p>
                         <p class="uploaded-at"
-                           th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.elapsedTime())}'>
+                           th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.timeSinceUpload())}'>
                             Uploaded 0 days ago
                         </p>
                     </div>

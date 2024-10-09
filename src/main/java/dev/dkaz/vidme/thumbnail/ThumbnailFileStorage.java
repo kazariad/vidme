@@ -1,7 +1,6 @@
 package dev.dkaz.vidme.thumbnail;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,7 +23,7 @@ public class ThumbnailFileStorage {
         LOOKUP_CACHE = new ConcurrentHashMap<>();
     }
 
-    public Optional<Path> findByFileId(String fileId) {
+    public Optional<Path> findById(String fileId) {
         if (LOOKUP_CACHE.containsKey(fileId)) {
             return Optional.of(LOOKUP_CACHE.get(fileId));
         }

@@ -34,7 +34,7 @@
             <div class="stats-container">
                 <p class="views" th:text='${T(java.lang.String).format("%,d views", videoDto.video().views)}'>0 views</p>
                 <p class="uploaded-at"
-                   th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.elapsedTime())}'>
+                   th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.timeSinceUpload())}'>
                     Uploaded 0 days ago
                 </p>
             </div>

@@ -25,7 +25,7 @@ public class VideoService {
         return videoRepository.findById(id);
     }
 
-    public Optional<Path> findVideoFileByFileId(String fileId) {
-        return videoFileStorage.findByFileId(fileId);
+    public Optional<Path> findVideoFileById(String fileId) {
+        return videoFileStorage.findById(fileId);
     }
 }
