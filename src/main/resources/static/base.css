@@ -23,8 +23,13 @@ header {
 
 .header-container {
     display: flex;
-    justify-content: space-between;
     padding: 0.5rem 0.75rem;
+}
+@media (min-width: 640px) {
+    .header-container {
+        max-width: 960px;
+        margin: 0 auto;
+    }
 }
 
 .header-container img {
@@ -34,13 +39,21 @@ header {
 
 .inner-body {
     background-color: white;
-    flex-grow: 1;
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
 }
+@media (min-width: 640px) {
+    .inner-body {
+        width: max(640px, 98%);
+        max-width: 960px;
+        align-self: center;
+        box-shadow: 3px 0 5px rgb(0 0 0 / 0.15), -3px 0 5px rgb(0 0 0 / 0.15);
+    }
+}
 
 main {
-    flex-grow: 1;
+    flex: 1 0 auto;
 }
 
 footer p {
@@ -49,21 +62,6 @@ footer p {
     color: rgb(150 150 150);
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
-}
-
-@media (min-width: 640px) {
-    .header-container {
-        width: max(640px, 98%);
-        max-width: 960px;
-        margin: 0 auto;
-    }
-
-    .inner-body {
-        width: max(640px, 98%);
-        max-width: 960px;
-        align-self: center;
-        box-shadow: 3px 0 5px rgb(0 0 0 / 0.15), -3px 0 5px rgb(0 0 0 / 0.15);
-    }
 }
 
 .plain-link:link {

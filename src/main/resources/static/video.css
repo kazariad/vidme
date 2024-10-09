@@ -1,7 +1,3 @@
-.inner-body {
-    margin-top: 0.75rem;
-}
-
 main {
     display: flex;
     flex-direction: column;
