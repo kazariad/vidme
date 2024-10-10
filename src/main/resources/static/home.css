@@ -1,7 +1,16 @@
+main {
+    padding: min(2%, 1rem);
+}
+
+main > h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 3rem;
+}
+
 .videos-container {
     display: flex;
     flex-direction: column;
-    padding: min(2%, 1rem);
     row-gap: 2.5rem;
 }
 

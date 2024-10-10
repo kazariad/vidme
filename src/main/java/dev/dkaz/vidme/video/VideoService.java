@@ -1,5 +1,6 @@
 package dev.dkaz.vidme.video;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
@@ -10,14 +11,23 @@ import java.util.Optional;
 public class VideoService {
     private final VideoRepository videoRepository;
     private final VideoFileStorage videoFileStorage;
+    private final Integer featuredVideosLimit;
 
-    public VideoService(VideoRepository videoRepository, VideoFileStorage videoFileStorage) {
+    public VideoService(
+            VideoRepository videoRepository,
+            VideoFileStorage videoFileStorage,
+            @Value("${vidme.featured-vids.limit}") Integer featuredVideosLimit) {
         this.videoRepository = videoRepository;
         this.videoFileStorage = videoFileStorage;
+        this.featuredVideosLimit = featuredVideosLimit;
     }
 
     public List<Video> findAllVideos() {
         return videoRepository.findAll();
+    }
+
+    public List<Video> findFeaturesVideos() {
+        return videoRepository.findAllOrderByRandom(featuredVideosLimit);
     }
 
     public Optional<Video> findVideoById(Long id) {

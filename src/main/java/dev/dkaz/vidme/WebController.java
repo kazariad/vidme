@@ -36,7 +36,7 @@ public class WebController {
 
     @GetMapping(path = "/")
     public String getHome(Model model) {
-        List<Video> videos = videoService.findAllVideos();
+        List<Video> videos = videoService.findFeaturesVideos();
         List<VideoWithHashUploadTime> videoDtos = videos.stream().map(video -> {
             String hashId = hashIdGenerator.encode(video.getId());
             String timeSinceUpload = timeUtil.getElapsedTime(video.getCreatedAt(), Instant.now());
