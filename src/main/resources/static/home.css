@@ -49,12 +49,14 @@ main > h1 {
 
 .details-container {
     flex: 0 1 auto;
+    max-height: 180px;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 @media (min-width: 640px) {
     .details-container {
-        flex: 1 0 0;
+        flex: 1 1 auto;
         height: 180px;
     }
 }
