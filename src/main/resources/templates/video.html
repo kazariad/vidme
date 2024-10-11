@@ -20,7 +20,15 @@
 
 <header>
     <div class="header-container">
-        <img src="/static/logo.png" width="467" height="163" alt="vidme logo"/>
+        <img class="logo" src="/static/logo.png" width="467" height="163" alt="vidme logo"/>
+        <div class="search-bar">
+            <form class="search-form" th:action="@{/videos}" action="/videos" method="get">
+                <input class="search-input" type="search" name="query" required/>
+                <button class="search-button" type="submit">
+                    <img src="/static/search.png" width="192" height="192" alt="Search icon"/>
+                </button>
+            </form>
+        </div>
     </div>
 </header>
 

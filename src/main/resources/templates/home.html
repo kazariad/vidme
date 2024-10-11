@@ -20,7 +20,15 @@
 
 <header>
     <div class="header-container">
-        <img src="/static/logo.png" width="467" height="163" alt="vidme logo"/>
+        <img class="logo" src="/static/logo.png" width="467" height="163" alt="vidme logo"/>
+        <div class="search-bar">
+            <form class="search-form" th:action="@{/videos}" action="/videos" method="get">
+                <input class="search-input" type="search" name="query" required/>
+                <button class="search-button" type="submit">
+                    <img src="/static/search.png" width="192" height="192" alt="Search icon"/>
+                </button>
+            </form>
+        </div>
     </div>
 </header>
 
@@ -37,7 +45,7 @@
                 </div>
                 <div class="details-container">
                     <a class="title plain-link" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" href="/video/id">
-                        <h2 th:text="${videoDto.video().title}">Video Title Video Title Video Title Video Title Video Title Video Title Video Title Video Title Video</h2>
+                        <h2 th:text="${videoDto.video().title}">Video Title</h2>
                     </a>
                     <div class="stats-container">
                         <p class="views"
@@ -49,7 +57,7 @@
                             Uploaded 0 days ago
                         </p>
                     </div>
-                    <p class="description" th:text="${videoDto.video().description}">Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description Video Description</p>
+                    <p class="description" th:text="${videoDto.video().description}">Video Description</p>
                 </div>
             </article>
         </div>
