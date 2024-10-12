@@ -78,12 +78,12 @@ main.videos .title {
 }
 
 main.videos .stats-container {
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem 2rem;
 }
 
 main.videos .description {
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
 }

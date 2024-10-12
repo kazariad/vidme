@@ -12,6 +12,7 @@ main.video .video-player {
     max-height: 80vh;
     flex: 1 1 auto;
     background-color: black;
+    border: 1px solid black;
 }
 
 /*hide chrome video player's default gradient overlay*/
