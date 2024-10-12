@@ -1,24 +1,24 @@
-main {
+.inner-body.video main {
     display: flex;
     flex-direction: column;
 }
 
-main > * {
+.inner-body.video main > * {
     margin: 0;
 }
 
-.video-player {
+.inner-body.video .video-player {
     display: block;
     max-height: 80vh;
     background-color: black;
 }
 
 /*hide chrome video player's default gradient overlay*/
-.video-player::-webkit-media-controls-panel {
+.inner-body.video .video-player::-webkit-media-controls-panel {
     background-image: none !important;
 }
 
-.details-container {
+.inner-body.video .details-container {
     width: 100%;
     max-width: 720px;
     align-self: center;
@@ -29,23 +29,22 @@ main > * {
     border-radius: 0.25rem;
 }
 
-.details-container * {
+.inner-body.video .details-container * {
     margin: 0;
 }
 
-.title {
+.inner-body.video .title {
     margin-top: 0;
-    text-align: center;
 }
 
-.stats-container {
+.inner-body.video .stats-container {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 2rem;
-    margin-top: 0.25rem;
+    margin-top: 0.75rem;
     font-weight: 500;
 }
 
-.description {
-    margin-top: 1rem;
+.inner-body.video .description {
+    margin-top: 0.75rem;
 }
