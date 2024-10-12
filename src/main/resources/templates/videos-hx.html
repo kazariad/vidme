@@ -1,0 +1,30 @@
+<article class="video-container" th:each="videoDto : ${videoDtos}">
+    <div class="thumbnail-container">
+        <a href="/video/hashId" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}">
+            <img th:src="@{/thumbnail/{fileId}(fileId=${videoDto.video().thumbnailId})}"
+                 src="/thumbnail/fileId" alt="Video thumbnail" class="thumbnail">
+        </a>
+    </div>
+    <div class="details-container">
+        <a class="title plain-link" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" href="/video/id">
+            <h2 th:text="${videoDto.video().title}">Video Title</h2>
+        </a>
+        <div class="stats-container">
+            <p class="views"
+               th:text='${T(java.lang.String).format("%,d views", videoDto.video().views)}'>
+                0 views
+            </p>
+            <p class="uploaded-at"
+               th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.timeSinceUpload())}'>
+                Uploaded 0 days ago
+            </p>
+        </div>
+        <p class="description" th:text="${videoDto.video().description}">Video Description</p>
+    </div>
+</article>
+
+<p th:if="${videoDtos.isEmpty() && page == 0}">No results</p>
+<p th:if="${videoDtos.isEmpty() && page > 0}">End of results</p>
+<div th:if="${!videoDtos.isEmpty()}" class="end-of-page"
+     th:hx-get="@{/hx/videos(query=${query}, page=${page + 1})}"
+     hx-trigger="revealed" hx-swap="outerHTML"></div>

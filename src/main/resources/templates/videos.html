@@ -16,7 +16,7 @@
 
     <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
 
-    <title>vidme</title>
+    <title th:text="${query + ' - vidme'}">query - vidme</title>
 </head>
 
 <body>
@@ -24,10 +24,10 @@
     <div class="header-container">
         <img class="logo" src="/static/images/logo.png" width="467" height="163" alt="vidme logo"/>
         <div class="search-bar">
-<!--            By default, response body's innerHtml is used as the replacement source-->
-<!--            If response contains a title, it will automatically replace the current title-->
+            <!--            By default, response body's innerHtml is used as the replacement source-->
+            <!--            If response contains a title, it will automatically replace the current title-->
             <form class="search-form" th:hx-get="@{/videos}" hx-target="body" hx-push-url="true">
-                <input class="search-input" type="search" name="query" required/>
+                <input class="search-input" type="search" name="query" th:value="${query}" required/>
                 <button class="search-button" type="submit">
                     <img src="/static/images/search.png" width="192" height="192" alt="Search icon"/>
                 </button>
@@ -38,7 +38,6 @@
 
 <div class="inner-body">
     <main>
-        <h1>Featured Videos</h1>
         <div class="videos-container">
             <article class="video-container" th:each="videoDto : ${videoDtos}">
                 <div class="thumbnail-container">
@@ -64,6 +63,12 @@
                     <p class="description" th:text="${videoDto.video().description}">Video Description</p>
                 </div>
             </article>
+
+            <p th:if="${videoDtos.isEmpty() && page == 0}">No results</p>
+            <p th:if="${videoDtos.isEmpty() && page > 0}">End of results</p>
+            <div th:if="${!videoDtos.isEmpty()}" class="end-of-page"
+                 th:hx-get="@{/hx/videos(query=${query}, page=${page + 1})}"
+                 hx-trigger="revealed" hx-swap="outerHTML"></div>
         </div>
     </main>
 

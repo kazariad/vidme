@@ -18,7 +18,7 @@ public class ThumbnailFileStorage {
     private final Path ROOT;
     private final Map<String, Path> LOOKUP_CACHE;
 
-    public ThumbnailFileStorage(@Value("${vidme.thumbnail.root-dir}") String rootDir) {
+    public ThumbnailFileStorage(@Value("${vidme.thumbnails.root-dir}") String rootDir) {
         ROOT = Paths.get(rootDir);
         LOOKUP_CACHE = new ConcurrentHashMap<>();
     }

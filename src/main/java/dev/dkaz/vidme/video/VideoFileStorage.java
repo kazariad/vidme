@@ -18,7 +18,7 @@ public class VideoFileStorage {
     private final Path ROOT;
     private final Map<String, Path> LOOKUP_CACHE;
 
-    public VideoFileStorage(@Value("${vidme.video.root-dir}") String rootDir) {
+    public VideoFileStorage(@Value("${vidme.videos.root-dir}") String rootDir) {
         ROOT = Paths.get(rootDir);
         LOOKUP_CACHE = new ConcurrentHashMap<>();
     }

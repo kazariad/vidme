@@ -11,23 +11,23 @@ import java.util.Optional;
 public class VideoService {
     private final VideoRepository videoRepository;
     private final VideoFileStorage videoFileStorage;
-    private final Integer featuredVideosLimit;
+    private final Integer pageSize;
 
     public VideoService(
             VideoRepository videoRepository,
             VideoFileStorage videoFileStorage,
-            @Value("${vidme.featured-vids.limit}") Integer featuredVideosLimit) {
+            @Value("${vidme.videos.page-size}") Integer pageSize) {
         this.videoRepository = videoRepository;
         this.videoFileStorage = videoFileStorage;
-        this.featuredVideosLimit = featuredVideosLimit;
-    }
-
-    public List<Video> findAllVideos() {
-        return videoRepository.findAll();
+        this.pageSize = pageSize;
     }
 
     public List<Video> findFeaturesVideos() {
-        return videoRepository.findAllOrderByRandom(featuredVideosLimit);
+        return videoRepository.findRandom(pageSize);
+    }
+
+    public List<Video> searchVideos(String query, int page) {
+        return videoRepository.findByTitleDescriptionSearch(query, page * pageSize, pageSize);
     }
 
     public Optional<Video> findVideoById(Long id) {
