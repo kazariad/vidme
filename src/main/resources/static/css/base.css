@@ -87,7 +87,7 @@ main {
 
 @media (min-width: 640px) {
     main {
-        width: max(640px, 98%);
+        width: 100%;
         max-width: 960px;
         align-self: center;
         box-shadow: 3px 0 5px rgb(0 0 0 / 0.15), -3px 0 5px rgb(0 0 0 / 0.15);
@@ -100,7 +100,7 @@ footer {
 
 @media (min-width: 640px) {
     footer {
-        width: max(640px, 98%);
+        width: 100%;
         max-width: 960px;
         align-self: center;
         box-shadow: 3px 0 5px rgb(0 0 0 / 0.15), -3px 0 5px rgb(0 0 0 / 0.15);
