@@ -23,13 +23,11 @@
 <body>
 <header>
     <div class="header-container">
-        <a href="/" th:href="@{/}" hx-boost="true">
+        <a th:href="@{/}" hx-boost="true" hx-target="body">
             <img class="logo" src="/static/images/logo.png" width="467" height="163" alt="vidme logo"/>
         </a>
         <div class="search-bar">
-            <!--            By default, response body's innerHtml is used as the replacement source-->
-            <!--            If response contains a title, it will automatically replace the current title-->
-            <form class="search-form" th:hx-get="@{/videos}" hx-target="body" hx-push-url="true">
+            <form class="search-form" th:action="@{/videos}" method="get" hx-boost="true" hx-target="body" hx-push-url="true">
                 <input class="search-input" type="search" name="query" required/>
                 <button class="search-button" type="submit">
                     <img src="/static/images/search.png" width="192" height="192" alt="Search icon"/>
@@ -39,28 +37,26 @@
     </div>
 </header>
 
-<div class="inner-body video">
-    <main>
-        <video class="video-player" th:src="@{/video/stream/{fileId}(fileId=${videoDto.video().fileId})}" controls autoplay>
-            Video
-        </video>
-        <div class="details-container">
-            <h1 class="title" th:text="${videoDto.video().title}">Video Title</h1>
-            <div class="stats-container">
-                <p class="views" th:text='${T(java.lang.String).format("%,d views", videoDto.video().views)}'>0 views</p>
-                <p class="uploaded-at"
-                   th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.timeSinceUpload())}'>
-                    Uploaded 0 days ago
-                </p>
-            </div>
-            <p class="description" style="white-space: pre-line" th:text="${videoDto.video().description}">Video Description</p>
+<main class="video">
+    <video class="video-player" th:src="@{/video/stream/{fileId}(fileId=${videoDto.video().fileId})}" controls autoplay>
+        Video
+    </video>
+    <div class="details-container">
+        <h1 class="title" th:text="${videoDto.video().title}">Video Title</h1>
+        <div class="stats-container">
+            <p class="views" th:text='${T(java.lang.String).format("%,d views", videoDto.video().views)}'>0 views</p>
+            <p class="uploaded-at"
+               th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.timeSinceUpload())}'>
+                Uploaded 0 days ago
+            </p>
         </div>
-    </main>
+        <p class="description" style="white-space: pre-line" th:text="${videoDto.video().description}">Video Description</p>
+    </div>
+</main>
 
-    <footer>
-        <p th:text="|© ${#temporals.year(#temporals.createNow())} vidme|">© 2000 vidme</p>
-    </footer>
-</div>
+<footer>
+    <p th:text="|© ${#temporals.year(#temporals.createNow())} vidme|">© 2000 vidme</p>
+</footer>
 </body>
 
 </html>

@@ -27,6 +27,7 @@ header {
     column-gap: 2%;
     padding: 0.5rem 0.75rem;
 }
+
 @media (min-width: 640px) {
     .header-container {
         max-width: 960px;
@@ -60,6 +61,7 @@ header {
     border-bottom-left-radius: 10px;
     padding: 0.1em 0 0.1em 0.5em;
 }
+
 .search-input:focus {
     outline: none;
 }
@@ -78,14 +80,13 @@ header {
     width: auto;
 }
 
-.inner-body {
-    background-color: white;
+main {
     flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
+    background-color: white;
 }
+
 @media (min-width: 640px) {
-    .inner-body {
+    main {
         width: max(640px, 98%);
         max-width: 960px;
         align-self: center;
@@ -93,15 +94,34 @@ header {
     }
 }
 
-main {
-    flex: 1 0 auto;
+footer {
+    background-color: white;
+}
+
+@media (min-width: 640px) {
+    footer {
+        width: max(640px, 98%);
+        max-width: 960px;
+        align-self: center;
+        box-shadow: 3px 0 5px rgb(0 0 0 / 0.15), -3px 0 5px rgb(0 0 0 / 0.15);
+    }
+
+    /*use to hide top box-shadow and have seamless transition between main and footer*/
+    footer::before {
+        content: "";
+        display: block;
+        height: 5px;
+        background-color: white;
+        position: relative;
+        bottom: 5px;
+    }
 }
 
 footer p {
     font-size: 0.75rem;
     text-align: center;
     color: rgb(150 150 150);
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
     margin-bottom: 0.5rem;
 }
 

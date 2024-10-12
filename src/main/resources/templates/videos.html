@@ -23,13 +23,11 @@
 <body>
 <header>
     <div class="header-container">
-        <a href="/" th:href="@{/}" hx-boost="true">
+        <a th:href="@{/}" hx-boost="true" hx-target="body">
             <img class="logo" src="/static/images/logo.png" width="467" height="163" alt="vidme logo"/>
         </a>
         <div class="search-bar">
-            <!--            By default, response body's innerHtml is used as the replacement source-->
-            <!--            If response contains a title, it will automatically replace the current title-->
-            <form class="search-form" th:hx-get="@{/videos}" hx-target="body" hx-push-url="true">
+            <form class="search-form" th:action="@{/videos}" method="get" hx-boost="true" hx-target="body" hx-push-url="true">
                 <input class="search-input" type="search" name="query" th:value="${query}" required/>
                 <button class="search-button" type="submit">
                     <img src="/static/images/search.png" width="192" height="192" alt="Search icon"/>
@@ -39,46 +37,44 @@
     </div>
 </header>
 
-<div class="inner-body videos">
-    <main>
-        <div class="videos-container">
-            <article class="video-container" th:each="videoDto : ${videoDtos}">
-                <div class="thumbnail-container">
-                    <a href="/video/hashId" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true">
-                        <img th:src="@{/thumbnail/{fileId}(fileId=${videoDto.video().thumbnailId})}"
-                             src="/thumbnail/fileId" alt="Video thumbnail" class="thumbnail">
-                    </a>
+<main class="videos">
+    <div class="videos-container">
+        <article class="video-container" th:each="videoDto : ${videoDtos}">
+            <div class="thumbnail-container">
+                <a th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true" hx-target="body">
+                    <img th:src="@{/thumbnail/{fileId}(fileId=${videoDto.video().thumbnailId})}"
+                         src="/thumbnail/fileId" alt="Video thumbnail" class="thumbnail">
+                </a>
+            </div>
+            <div class="details-container">
+                <a class="title plain-link" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true" hx-target="body">
+                    <h2 th:text="${videoDto.video().title}">Video Title</h2>
+                </a>
+                <div class="stats-container">
+                    <p class="views"
+                       th:text='${T(java.lang.String).format("%,d views", videoDto.video().views)}'>
+                        0 views
+                    </p>
+                    <p class="uploaded-at"
+                       th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.timeSinceUpload())}'>
+                        Uploaded 0 days ago
+                    </p>
                 </div>
-                <div class="details-container">
-                    <a class="title plain-link" href="/video/id" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true">
-                        <h2 th:text="${videoDto.video().title}">Video Title</h2>
-                    </a>
-                    <div class="stats-container">
-                        <p class="views"
-                           th:text='${T(java.lang.String).format("%,d views", videoDto.video().views)}'>
-                            0 views
-                        </p>
-                        <p class="uploaded-at"
-                           th:text='${T(java.lang.String).format("Uploaded %s ago", videoDto.timeSinceUpload())}'>
-                            Uploaded 0 days ago
-                        </p>
-                    </div>
-                    <p class="description" th:text="${videoDto.video().description}">Video Description</p>
-                </div>
-            </article>
+                <p class="description" th:text="${videoDto.video().description}">Video Description</p>
+            </div>
+        </article>
 
-            <p th:if="${videoDtos.isEmpty() && page == 0}">No results</p>
-            <p th:if="${videoDtos.isEmpty() && page > 0}">End of results</p>
-            <div th:if="${!videoDtos.isEmpty()}" class="end-of-page"
-                 th:hx-get="@{/hx/videos(query=${query}, page=${page + 1})}"
-                 hx-trigger="revealed" hx-swap="outerHTML"></div>
-        </div>
-    </main>
+        <p th:if="${videoDtos.isEmpty() && page == 0}">No results</p>
+        <p th:if="${videoDtos.isEmpty() && page > 0}">End of results</p>
+        <div th:if="${!videoDtos.isEmpty()}" class="end-of-page"
+             th:hx-get="@{/hx/videos(query=${query}, page=${page + 1})}"
+             hx-trigger="revealed" hx-swap="outerHTML"></div>
+    </div>
+</main>
 
-    <footer>
-        <p th:text="|© ${#temporals.year(#temporals.createNow())} vidme|">© 2000 vidme</p>
-    </footer>
-</div>
+<footer>
+    <p th:text="|© ${#temporals.year(#temporals.createNow())} vidme|">© 2000 vidme</p>
+</footer>
 </body>
 
 </html>
