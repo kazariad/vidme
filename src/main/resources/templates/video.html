@@ -11,8 +11,8 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css"/>
 
-    <link rel="stylesheet" href="/static/base.css"/>
-    <link rel="stylesheet" href="/static/video.css"/>
+    <link rel="stylesheet" href="/static/css/base.css"/>
+    <link rel="stylesheet" href="/static/css/video.css"/>
 
     <title th:text="${videoDto.video().title}">Video Title</title>
 </head>
@@ -20,12 +20,16 @@
 
 <header>
     <div class="header-container">
-        <img class="logo" src="/static/logo.png" width="467" height="163" alt="vidme logo"/>
+        <a href="/" th:href="@{/}" hx-boost="true">
+            <img class="logo" src="/static/images/logo.png" width="467" height="163" alt="vidme logo"/>
+        </a>
         <div class="search-bar">
-            <form class="search-form" th:action="@{/videos}" action="/videos" method="get">
-                <input class="search-input" type="search" name="query" required/>
+            <!--            By default, response body's innerHtml is used as the replacement source-->
+            <!--            If response contains a title, it will automatically replace the current title-->
+            <form class="search-form" th:hx-get="@{/videos}" hx-target="body" hx-push-url="true">
+                <input class="search-input" type="search" name="query" th:value="${query}" required/>
                 <button class="search-button" type="submit">
-                    <img src="/static/search.png" width="192" height="192" alt="Search icon"/>
+                    <img src="/static/images/search.png" width="192" height="192" alt="Search icon"/>
                 </button>
             </form>
         </div>
