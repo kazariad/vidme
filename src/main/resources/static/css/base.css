@@ -37,14 +37,17 @@ header {
     }
 }
 
+.header-container a {
+    flex: 1 1 0;
+}
+
 .logo {
     width: auto;
     max-height: 2.5rem;
-    flex: 0 1 auto;
 }
 
 .search-bar {
-    flex: 1 1 auto;
+    flex: 1 1 100%;
     max-width: 500px;
     overflow: hidden;
 }
@@ -80,6 +83,10 @@ header {
 .search-button img {
     height: 1.25em;
     width: auto;
+}
+
+.header-container .filler {
+    flex: 1 1 0;
 }
 
 main {

@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" href="/static/images/favicon.png" th:href="@{/images/favicon.png}"/>
 
     <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
-    <script src="/static/js/autoplay-fix.js" th:href="@{/js/autoplay-fix.js}"></script>
+    <script src="/static/js/autoplay-fix.js" th:src="@{/js/autoplay-fix.js}"></script>
 
     <title th:text="${videoDto.video().title}">Video Title</title>
 </head>
@@ -37,6 +37,7 @@
                 </button>
             </form>
         </div>
+        <div class="filler"></div>
     </div>
 </header>
 
