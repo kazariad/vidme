@@ -20,7 +20,7 @@
     <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
     <script src="/static/js/autoplay-fix.js" th:src="@{/js/autoplay-fix.js}"></script>
 
-    <title th:text="${query + ' - vidme'}">query - vidme</title>
+    <title th:text="(${query.isEmpty()} ? 'All videos' : ${query}) + ' - vidme'">query - vidme</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
         </a>
         <div class="search-bar">
             <form class="search-form" action="#" th:action="@{/videos}" method="get" hx-boost="true" hx-target="body" hx-push-url="true">
-                <input class="search-input" type="search" name="query" th:value="${query}" required/>
+                <input class="search-input" type="search" name="query" th:value="${query}"/>
                 <button class="search-button" type="submit">
                     <img src="/static/images/search.png" th:src="@{/images/search.png}" width="192" height="192" alt="Search icon"/>
                 </button>

@@ -1,6 +1,7 @@
 package dev.dkaz.vidme.video;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
@@ -27,7 +28,11 @@ public class VideoService {
     }
 
     public List<Video> searchVideos(String query, int page) {
-        return videoRepository.findByTitleDescriptionSearch(query, page * pageSize, pageSize);
+        if (query.isBlank() || query.equals("*")) {
+            return videoRepository.findAll(Pageable.ofSize(pageSize).withPage(page)).toList();
+        } else {
+            return videoRepository.findByTitleDescriptionSearch(query, page * pageSize, pageSize);
+        }
     }
 
     public Optional<Video> findVideoById(Long id) {

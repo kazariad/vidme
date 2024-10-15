@@ -31,7 +31,7 @@
         </a>
         <div class="search-bar">
             <form class="search-form" action="#" th:action="@{/videos}" method="get" hx-boost="true" hx-target="body" hx-push-url="true">
-                <input class="search-input" type="search" name="query" th:value="${query}" required/>
+                <input class="search-input" type="search" name="query" th:value="${query}"/>
                 <button class="search-button" type="submit">
                     <img src="/static/images/search.png" th:src="@{/images/search.png}" width="192" height="192" alt="Search icon"/>
                 </button>

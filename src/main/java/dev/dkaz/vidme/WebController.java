@@ -49,7 +49,8 @@ public class WebController {
     }
 
     @GetMapping(path = "/videos")
-    public String searchVideos(@RequestParam String query, Model model) {
+    public String searchVideos(@RequestParam(defaultValue = "") String query, Model model) {
+        query = query.trim();
         List<Video> videos = videoService.searchVideos(query, 0);
         List<VideoWithHashUploadTime> videoDtos = videos.stream().map(video -> {
             String hashId = hashIdGenerator.encode(video.getId());
