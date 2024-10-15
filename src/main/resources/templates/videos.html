@@ -11,12 +11,12 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css"/>
 
-    <link rel="stylesheet" href="/static/css/base.css"/>
-    <link rel="stylesheet" href="/static/css/video.css"/>
-    <link rel="stylesheet" href="/static/css/videos.css"/>
+    <link rel="stylesheet" href="/static/css/base.css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" href="/static/css/video.css" th:href="@{/css/video.css}"/>
+    <link rel="stylesheet" href="/static/css/videos.css" th:href="@{/css/videos.css}"/>
 
     <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
-    <script src="/static/js/autoplay-fix.js"></script>
+    <script src="/static/js/autoplay-fix.js" th:href="@{/js/autoplay-fix.js}"></script>
 
     <title th:text="${query + ' - vidme'}">query - vidme</title>
 </head>
@@ -24,14 +24,14 @@
 <body>
 <header>
     <div class="header-container">
-        <a th:href="@{/}" hx-boost="true" hx-target="body">
-            <img class="logo" src="/static/images/logo.png" width="467" height="163" alt="vidme logo"/>
+        <a href="/" th:href="@{/}" hx-boost="true" hx-target="body">
+            <img class="logo" src="/static/images/logo.png" th:src="@{/images/logo.png}" width="467" height="163" alt="vidme logo"/>
         </a>
         <div class="search-bar">
-            <form class="search-form" th:action="@{/videos}" method="get" hx-boost="true" hx-target="body" hx-push-url="true">
+            <form class="search-form" action="#" th:action="@{/videos}" method="get" hx-boost="true" hx-target="body" hx-push-url="true">
                 <input class="search-input" type="search" name="query" th:value="${query}" required/>
                 <button class="search-button" type="submit">
-                    <img src="/static/images/search.png" width="192" height="192" alt="Search icon"/>
+                    <img src="/static/images/search.png" th:src="@{/images/search.png}" width="192" height="192" alt="Search icon"/>
                 </button>
             </form>
         </div>
@@ -42,14 +42,12 @@
     <div class="videos-container">
         <article class="video-container" th:each="videoDto : ${videoDtos}">
             <div class="thumbnail-container">
-                <a th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}"
-                   th:hx-get="@{/video/{hashId}(hashId=${videoDto.hashId()})}" hx-target="body" hx-push-url="true">
-                    <img th:src="@{/thumbnail/{fileId}(fileId=${videoDto.video().thumbnailId})}"
-                         src="/thumbnail/fileId" alt="Video thumbnail" class="thumbnail">
+                <a href="#" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true" hx-target="body">
+                    <img class="thumbnail" src="#" th:src="@{/thumbnail/{fileId}(fileId=${videoDto.video().thumbnailId})}" alt="Video thumbnail">
                 </a>
             </div>
             <div class="details-container">
-                <a class="title plain-link" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true" hx-target="body">
+                <a class="title plain-link" href="#" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true" hx-target="body">
                     <h2 th:text="${videoDto.video().title}">Video Title</h2>
                 </a>
                 <div class="stats-container">
