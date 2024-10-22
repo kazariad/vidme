@@ -3,8 +3,9 @@ package dev.dkaz.vidme;
 import dev.dkaz.vidme.thumbnail.ThumbnailService;
 import dev.dkaz.vidme.video.Video;
 import dev.dkaz.vidme.video.VideoService;
+import dev.dkaz.vidme.video.VideoSort;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,19 +27,24 @@ public class WebController {
     private final ThumbnailService thumbnailService;
     private final HashIdGenerator hashIdGenerator;
     private final TimeUtil timeUtil;
+    private final int pageSize;
 
-    public WebController(VideoService videoService, ThumbnailService thumbnailService, HashIdGenerator hashIdGenerator, TimeUtil timeUtil) {
+    public WebController(
+            VideoService videoService, ThumbnailService thumbnailService, HashIdGenerator hashIdGenerator,
+            TimeUtil timeUtil, @Value("${vidme.videos.page-size}") int pageSize
+    ) {
         this.videoService = videoService;
         this.thumbnailService = thumbnailService;
         this.hashIdGenerator = hashIdGenerator;
         this.timeUtil = timeUtil;
+        this.pageSize = pageSize;
     }
 
     public record VideoWithHashUploadTime(Video video, String hashId, String timeSinceUpload) {}
 
     @GetMapping(path = "/")
     public String getHome(Model model) {
-        List<Video> videos = videoService.findFeaturesVideos();
+        List<Video> videos = videoService.findFeaturedVideos(0, pageSize);
         List<VideoWithHashUploadTime> videoDtos = videos.stream().map(video -> {
             String hashId = hashIdGenerator.encode(video.getId());
             String timeSinceUpload = timeUtil.getElapsedTime(video.getCreatedAt(), Instant.now());
@@ -49,31 +55,47 @@ public class WebController {
     }
 
     @GetMapping(path = "/videos")
-    public String searchVideos(@RequestParam(defaultValue = "") String query, Model model) {
+    public String searchVideos(
+            @RequestParam(defaultValue = "") String query,
+            @RequestParam(defaultValue = "newest") String sort,
+            Model model) {
         query = query.trim();
-        List<Video> videos = videoService.searchVideos(query, 0);
+        VideoSort videoSort = VideoSort.valueOf(sort.toUpperCase());
+
+        List<Video> videos = videoService.searchVideos(query, videoSort, 0, pageSize);
         List<VideoWithHashUploadTime> videoDtos = videos.stream().map(video -> {
             String hashId = hashIdGenerator.encode(video.getId());
             String timeSinceUpload = timeUtil.getElapsedTime(video.getCreatedAt(), Instant.now());
             return new VideoWithHashUploadTime(video, hashId, timeSinceUpload);
         }).toList();
+
         model.addAttribute("videoDtos", videoDtos);
         model.addAttribute("query", query);
+        model.addAttribute("videoSort", videoSort);
         model.addAttribute("page", 0);
         return "videos";
     }
 
     @GetMapping(path = "/hx/videos", headers = {"HX-Request"})
-    public String searchVideosHx(@RequestParam String query, Pageable pageable, Model model) {
-        List<Video> videos = videoService.searchVideos(query, pageable.getPageNumber());
+    public String searchVideosHx(
+            @RequestParam(defaultValue = "") String query,
+            @RequestParam(defaultValue = "newest") String sort,
+            @RequestParam int page,
+            Model model) {
+        query = query.trim();
+        VideoSort videoSort = VideoSort.valueOf(sort.toUpperCase());
+
+        List<Video> videos = videoService.searchVideos(query, videoSort, page, pageSize);
         List<VideoWithHashUploadTime> videoDtos = videos.stream().map(video -> {
             String hashId = hashIdGenerator.encode(video.getId());
             String timeSinceUpload = timeUtil.getElapsedTime(video.getCreatedAt(), Instant.now());
             return new VideoWithHashUploadTime(video, hashId, timeSinceUpload);
         }).toList();
+
         model.addAttribute("videoDtos", videoDtos);
         model.addAttribute("query", query);
-        model.addAttribute("page", pageable.getPageNumber());
+        model.addAttribute("videoSort", videoSort);
+        model.addAttribute("page", page);
         return "videos-hx";
     }
 

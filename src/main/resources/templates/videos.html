@@ -42,6 +42,18 @@
 </header>
 
 <main class="videos">
+    <div class="videos-header">
+        <h1>Search Results</h1>
+        <form class="sort-form" action="#" th:action="@{/videos}" method="get" hx-boost="true" hx-target="body" hx-push-url="true" hx-trigger="change from:#sort-select">
+            <input type="hidden" name="query" th:value="${query}"/>
+            <label for="sort-select">Sort by</label>
+            <select name="sort" id="sort-select">
+                <option value="newest" th:selected="${videoSort == T(dev.dkaz.vidme.video.VideoSort).NEWEST}">Newest</option>
+                <option value="oldest" th:selected="${videoSort == T(dev.dkaz.vidme.video.VideoSort).OLDEST}">Oldest</option>
+                <option value="views" th:selected="${videoSort == T(dev.dkaz.vidme.video.VideoSort).VIEWS}">Views</option>
+            </select>
+        </form>
+    </div>
     <div class="videos-container">
         <article class="video-container" th:each="videoDto : ${videoDtos}">
             <div class="thumbnail-container">
