@@ -116,7 +116,7 @@ public class WebController {
         Optional<Path> pathOpt = videoService.findVideoFileById(fileId);
         if (pathOpt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         FileSystemResource fsr = new FileSystemResource(pathOpt.get());
-        return ResponseEntity.ok().contentType(new MediaType("video", "webm")).body(fsr);
+        return ResponseEntity.ok().contentType(new MediaType("video", "mp4")).body(fsr);
     }
 
     @GetMapping(path = "/thumbnail/{fileId}")

@@ -29,7 +29,7 @@ public class VideoFileStorage {
         }
 
         try (Stream<Path> paths = Files.find(ROOT, 1, (path, basicFileAttributes) ->
-                path.getFileName().toString().equals(fileId + ".webm")
+                path.getFileName().toString().equals(fileId + ".mp4")
         )) {
             Optional<Path> pathOpt = paths.findFirst();
             pathOpt.ifPresent(path -> LOOKUP_CACHE.put(fileId, path));
