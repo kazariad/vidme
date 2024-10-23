@@ -50,4 +50,5 @@ main.video .stats-container {
 
 main.video .description {
     margin-top: 0.75rem;
+    white-space: pre-line;
 }

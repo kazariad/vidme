@@ -27,7 +27,13 @@ main.videos .videos-container {
     flex: 1 0 auto;
     display: flex;
     flex-direction: column;
-    row-gap: 2.5rem;
+    row-gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    main.videos .videos-container {
+        row-gap: 2rem;
+    }
 }
 
 main.videos .videos-container > p {
@@ -35,7 +41,7 @@ main.videos .videos-container > p {
 }
 
 main.videos .video-container {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     display: flex;
     flex-direction: column;
     gap: 0.75rem 0;
@@ -43,6 +49,7 @@ main.videos .video-container {
 
 @media (min-width: 640px) {
     main.videos .video-container {
+        flex: 1 1 auto;
         flex-direction: row;
         gap: 0 1.5rem;
     }
@@ -114,4 +121,5 @@ main.videos .stats-container {
 
 main.videos .description {
     margin-top: 0.5rem;
+    white-space: pre-line;
 }
