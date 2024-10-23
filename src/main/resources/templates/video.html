@@ -42,7 +42,7 @@
 </header>
 
 <main class="video">
-    <video class="video-player" src="#" th:src="@{/video/stream/{fileId}(fileId=${videoDto.video().fileId})}" controls autoplay>
+    <video class="video-player" src="#" th:src="@{/video/{fileId}(fileId=${videoDto.video().fileId})}" controls autoplay>
         Video
     </video>
     <div class="details-container">

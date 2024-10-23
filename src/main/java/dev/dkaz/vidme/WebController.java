@@ -54,6 +54,18 @@ public class WebController {
         return "home";
     }
 
+    @GetMapping(path = "/{hashId}")
+    public String getVideo(@PathVariable String hashId, Model model) {
+        Long id = hashIdGenerator.decode(hashId);
+        Optional<Video> videoOpt = videoService.findVideoById(id);
+        if (videoOpt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        Video video = videoOpt.get();
+        // use relative time since we don't know client's time zone
+        String timeSinceUpload = timeUtil.getElapsedTime(video.getCreatedAt(), Instant.now());
+        model.addAttribute("videoDto", new VideoWithHashUploadTime(video, hashId, timeSinceUpload));
+        return "video";
+    }
+
     @GetMapping(path = "/videos")
     public String searchVideos(
             @RequestParam(defaultValue = "") String query,
@@ -99,19 +111,7 @@ public class WebController {
         return "videos-hx";
     }
 
-    @GetMapping(path = "/video/{hashId}")
-    public String getVideo(@PathVariable String hashId, Model model) {
-        Long id = hashIdGenerator.decode(hashId);
-        Optional<Video> videoOpt = videoService.findVideoById(id);
-        if (videoOpt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        Video video = videoOpt.get();
-        // use relative time since we don't know client's time zone
-        String timeSinceUpload = timeUtil.getElapsedTime(video.getCreatedAt(), Instant.now());
-        model.addAttribute("videoDto", new VideoWithHashUploadTime(video, hashId, timeSinceUpload));
-        return "video";
-    }
-
-    @GetMapping(path = "/video/stream/{fileId}")
+    @GetMapping(path = "/video/{fileId}")
     public ResponseEntity<FileSystemResource> getVideoFile(@PathVariable String fileId) {
         Optional<Path> pathOpt = videoService.findVideoFileById(fileId);
         if (pathOpt.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);

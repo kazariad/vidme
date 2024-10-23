@@ -48,13 +48,13 @@
     <div class="videos-container">
         <article class="video-container" th:each="videoDto : ${videoDtos}">
             <div class="thumbnail-container">
-                <a href="#" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true" hx-target="body">
+                <a href="#" th:href="@{/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true" hx-target="body">
                     <img class="thumbnail" src="#" th:src="@{/thumbnail/{fileId}(fileId=${videoDto.video().thumbnailId})}" alt="Video thumbnail">
                 </a>
             </div>
             <div class="details-container">
                 <div class="blur"></div>
-                <a class="title plain-link" href="#" th:href="@{/video/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true" hx-target="body">
+                <a class="title plain-link" href="#" th:href="@{/{hashId}(hashId=${videoDto.hashId()})}" hx-boost="true" hx-target="body">
                     <h2 th:text="${videoDto.video().title}">Video Title</h2>
                 </a>
                 <div class="stats-container">
