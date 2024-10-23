@@ -97,9 +97,11 @@ main.videos .blur {
     top: 0.5rem;
     z-index: 1;
     background: linear-gradient(transparent 70%, white 90%);
+    pointer-events: none;
 }
 
 main.videos .title {
+    align-self: start;
     margin-top: 0;
 }
 
